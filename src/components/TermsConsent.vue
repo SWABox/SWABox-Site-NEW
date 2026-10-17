@@ -66,8 +66,10 @@
 <script setup>
 import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue';
 import AppIcon from './AppIcon.vue';
+import { securityEnabled } from '../data/runtime.js';
 
 const STORAGE_KEY = 'swabox_terms_accepted';
+
 
 const showModal = ref(false);
 const dialogEl = ref(null);
@@ -75,6 +77,7 @@ const agreeBtn = ref(null);
 let lastFocused = null;
 
 onMounted(() => {
+  if (!securityEnabled) return;
   if (localStorage.getItem(STORAGE_KEY)) return;
 
   showModal.value = true;

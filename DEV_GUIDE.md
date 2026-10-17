@@ -70,9 +70,7 @@ public/fonts/inter-latin.woff2   拉丁字母与数字（Inter Variable，约 47
 ## 访问验证流程
 
 1. 路由守卫检查 `localStorage['swabox_verified']`（JSON `{ valid: true, ts }`，24 小时内有效）；没有就跳到 `/challenge?redirect=原路径`。带 `meta.requiresAuth` 的页面（首页、隐私政策、用户协议）都走这一关，`/challenge` 与 `/error/*` 始终可访问。
-2. 验证页渲染 Turnstile，拿到 token 后：
-   - 开发模式（`import.meta.env.DEV`）：直接把 `swabox_verified` 写进 localStorage，不发请求。
-   - 生产模式：`POST /api/verify-turnstile`，body 为 `{ token }`，由 Pages Function 调 `siteverify` 校验。
+2. 验证页渲染 Turnstile，拿到 token 后 `POST /api/verify-turnstile`，body 为 `{ token }`，由 Pages Function 调 `siteverify` 校验。开发服务器里这次请求由 `vite.config.js` 的代理直接返回 `{ "success": true, "message": "开发模式模拟成功" }`，不会真的校验 token。
 3. 校验通过后写入：
 
 | key | 值 | 有效期 |
@@ -82,7 +80,19 @@ public/fonts/inter-latin.woff2   拉丁字母与数字（Inter Variable，约 47
 
 4. 条款弹窗只在 `swabox_terms_accepted` 不存在时出现。点「不同意」不写入任何内容，直接关闭弹窗，不影响浏览。
 
-**开发时没有可见的「跳过验证」按钮**，跳过逻辑在 `src/views/Home.vue` 与 `src/views/Challenge.vue` 的 `if (import.meta.env.DEV)` 分支里，生产构建会把它编译掉。
+**验证与协议弹窗由开关控制，不再按 `import.meta.env.DEV` 硬跳过。** 开关值集中从 `src/data/runtime.js` 的 `securityEnabled` 导出，其余代码只引用它：
+
+- 生产构建（`npm run build`）：一定开启。
+- 开发服务器（`npm run dev`）：默认关闭，直接进首页，方便调样式。
+- 想在 dev 下完整走一遍验证：`VITE_ENABLE_SECURITY=true npm run dev`（PowerShell 用 `$env:VITE_ENABLE_SECURITY='true'; npm run dev`），此时 `/api/verify-turnstile` 由代理 mock 返回成功。
+
+实现上有个坑：**vite 5 在 dev（serve）阶段不会把 `config.define` 写进模块源码**，只把这些值挂到全局（`/@vite/env` 的 `assign defines`），所以源码里直接引用注入名在 dev 下会 `ReferenceError`。本项目的做法：
+
+- `vite.config.js` 里的 `swabox:site-mode` 插件在 serve 阶段把 `src/**` 里的标识符 `SITE_MODE_INJECTED` 换成 `'production'` / `'development'`（先处理 `typeof SITE_MODE_INJECTED`，再换标识符本身）。
+- 构建阶段由 `define: { SITE_MODE_INJECTED: ... }` 交给 Rollup 做同样的整词替换。
+- 两边都换完，产物里不会残留 `SITE_MODE_INJECTED`，构建后可在 `dist/assets/*.js` 里 grep 验证。
+
+另外 `server.watch.ignored` 排除了 `.edge-profile`、`.shots` 等临时目录，否则截图脚本的浏览器配置会被 watcher 侦测并抛 `EBUSY`，把 dev 服务器直接打崩。
 
 ## Turnstile 配置
 
@@ -160,8 +170,8 @@ Cloudflare Pages：
 - 本地 `vite dev` 没有 Pages Functions 环境，`vite.config.js` 里对 `/api/verify-turnstile` 做的是 `success: true` 的 mock，只用于跑通流程，不代表真实校验。
 - 真实 Turnstile 校验、生产 CSP 生效情况、Pages Function 的线上行为都需要在 Cloudflare 环境验证，本地只能验证渲染与交互。
 - `public/` 下仍留有旧的 `error-bg.jpg`、`icons.svg`、`logo.png`，当前页面没有引用，可按需删除。
-- `public/app/privacy.html`、`public/app/terms.html` 是客户端安装包里用的独立条款页，仍是旧版样式，不参与 Vue 站点的设计系统。
+- `public/app/privacy.html`、`public/app/terms.html` 是客户端安装包里用的独立条款页，纯静态 HTML。它们与站点共用同一套 Fluent 令牌（颜色、圆角、字体一致），但样式内联在各自文件里，不跟随 `src/style.css` 自动更新。
 
 ---
 
-**最后更新**：2026-10-17
+**最后更新**：2026-10-17（补充安全验证开关说明、静态条款页样式）

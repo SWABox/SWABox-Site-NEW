@@ -1,322 +1,198 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>用户协议 | SWABox 应用</title>
-    <style>
-        /* ========== 深色主题，完全去除噪点背景 ========== */
-        :root {
-            --bg-base: #0a0a0f;
-            --bg-elevated: #111118;
-            --bg-surface: #18181f;
-            --bg-hover: #1f1f2a;
-            --green-primary: #22c55e;
-            --green-light: #86efac;
-            --green-muted: #166534;
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --text-dim: #475569;
-            --border-default: rgba(255, 255, 255, 0.08);
-            --radius-md: 12px;
-            --radius-lg: 20px;
-            --nav-height: 72px;
-            --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-        }
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            background: var(--bg-base);
-            color: var(--text-primary);
-            font-family: var(--font-sans);
-            line-height: 1.6;
-            overflow-x: hidden;
-            min-height: 100vh;
-            background-color: #0a0a0f;
-        }
-        a {
-            color: inherit;
-            text-decoration: none;
-            transition: color 0.2s ease;
-        }
-        .container {
-            width: min(1200px, 94vw);
-            margin-inline: auto;
-        }
-        ::selection {
-            background: rgba(34, 197, 94, 0.3);
-            color: var(--text-primary);
-        }
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--bg-base);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #2a2a35;
-            border-radius: 8px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--green-muted);
-        }
-        /* 导航栏 */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(10, 10, 15, 0.92);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-default);
-            z-index: 100;
-            height: var(--nav-height);
-            display: flex;
-            align-items: center;
-        }
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: min(1200px, 94vw);
-            margin: 0 auto;
-        }
-        .logo a {
-            font-weight: 700;
-            font-size: 1.5rem;
-            background: linear-gradient(135deg, var(--green-primary), var(--green-light));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-        .nav-links a {
-            color: var(--text-secondary);
-            font-weight: 500;
-        }
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--green-primary);
-        }
-        /* 页脚 */
-        .site-footer {
-            border-top: 1px solid var(--border-default);
-            padding: 2rem 0;
-            margin-top: 2rem;
-            text-align: center;
-            color: var(--text-dim);
-            font-size: 0.85rem;
-        }
-        /* 文档卡片 */
-        .terms-page {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-        .main-content {
-            flex: 1;
-            padding: calc(var(--nav-height) + 48px) 0 80px;
-        }
-        .document-card {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-default);
-            border-radius: var(--radius-lg);
-            padding: 3rem;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        .title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--green-primary), var(--green-light));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            border-bottom: 2px solid var(--border-default);
-            padding-bottom: 1rem;
-        }
-        .effective-date {
-            color: var(--text-dim);
-            margin-bottom: 1.5rem;
-        }
-        .mit-highlight {
-            background: rgba(34, 197, 94, 0.08);
-            border-left: 4px solid var(--green-primary);
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-            border-radius: 0 var(--radius-md) var(--radius-md) 0;
-        }
-        h2 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin: 2rem 0 1rem;
-            color: var(--text-primary);
-        }
-        p, li {
-            color: var(--text-secondary);
-        }
-        ul {
-            margin: 1rem 0 1rem 2rem;
-        }
-        li {
-            margin: 0.5rem 0;
-        }
-        .url {
-            color: var(--green-primary);
-            text-decoration: none;
-        }
-        .url:hover {
-            text-decoration: underline;
-        }
-        .back-link {
-            display: block;
-            margin-top: 2rem;
-            text-align: center;
-            color: var(--text-dim);
-            font-weight: 500;
-        }
-        .back-link:hover {
-            color: var(--green-primary);
-        }
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-            color: var(--text-secondary);
-            background: rgba(0,0,0,0.3);
-            border-radius: var(--radius-md);
-            overflow: hidden;
-        }
-        .data-table th, .data-table td {
-            border: 1px solid var(--border-default);
-            padding: 0.75rem 1rem;
-            text-align: left;
-            vertical-align: top;
-        }
-        .data-table th {
-            background: rgba(34, 197, 94, 0.1);
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-        @media (max-width: 768px) {
-            .document-card { padding: 1.5rem; }
-            .title { font-size: 1.8rem; }
-            h2 { font-size: 1.25rem; }
-        }
-        .warning-box {
-            background: rgba(239, 68, 68, 0.08);
-            border-left: 4px solid #ef4444;
-            padding: 1rem 1.5rem;
-            margin: 1.2rem 0;
-            border-radius: var(--radius-md);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <title>用户协议 | SWABox 应用</title>
+<style>
+    :root {
+      --bg: #101413;
+      --surface: #1a1f1d;
+      --stroke: rgba(255, 255, 255, 0.075);
+      --text: #f3f2ee;
+      --text-2: #b8beb8;
+      --text-3: #8d958f;
+      --accent: #3fbe87;
+      --r-lg: 8px;
+      --font-sans: "SWABox Sans", "Segoe UI Variable Text", "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html { -webkit-text-size-adjust: 100%; }
+
+    body {
+      margin: 0;
+      padding: clamp(28px, 6vw, 64px) clamp(18px, 5vw, 32px);
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: 15px;
+      line-height: 1.85;
+    }
+
+    .doc { max-width: 720px; margin: 0 auto; }
+
+    .doc__kicker {
+      margin: 0;
+      font-size: 11.5px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+    }
+
+    .doc__title {
+      margin: 10px 0 0;
+      font-size: clamp(1.6rem, 4vw, 2.1rem);
+      font-weight: 650;
+      line-height: 1.35;
+      letter-spacing: -0.02em;
+    }
+
+    .doc__meta {
+      margin: 10px 0 0;
+      font-size: 12px;
+      color: var(--text-3);
+    }
+
+    .doc__body { margin-top: 32px; }
+
+    h2 {
+      margin: 34px 0 12px;
+      padding-top: 20px;
+      border-top: 1px solid var(--stroke);
+      font-size: 1.02rem;
+      font-weight: 650;
+      letter-spacing: -0.01em;
+    }
+
+    h2:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+
+    p { margin: 12px 0; color: var(--text-2); }
+
+    strong { color: var(--text); font-weight: 600; }
+
+    ul { margin: 12px 0; padding-left: 1.1em; color: var(--text-2); }
+
+    li { margin: 6px 0; }
+
+    a { color: var(--accent); text-decoration: none; }
+
+    a:hover { text-decoration: underline; }
+
+    .note {
+      margin: 24px 0;
+      padding: 16px 18px;
+      border: 1px solid var(--stroke);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--r-lg);
+      background: var(--surface);
+    }
+
+    .table-wrap { overflow-x: auto; margin: 16px 0; }
+
+    table {
+      width: 100%;
+      min-width: 420px;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+
+    th, td {
+      padding: 10px 12px;
+      border: 1px solid var(--stroke);
+      text-align: left;
+      vertical-align: top;
+      color: var(--text-2);
+    }
+
+    th { color: var(--text); font-weight: 600; background: var(--surface); }
+
+    .doc__foot {
+      margin-top: 40px;
+      padding-top: 18px;
+      border-top: 1px solid var(--stroke);
+      font-size: 12px;
+      color: var(--text-3);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+  </style>
 </head>
 <body>
-<div class="terms-page">
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo"><a href="#">SWABox</a></div>
-            <div class="nav-links">
-                <a href="privacy.html">隐私政策</a>
-                <a href="terms.html" class="active">用户协议</a>
-            </div>
-        </div>
-    </nav>
-    <main class="main-content">
-        <div class="container">
-            <div class="document-card">
-                <h1 class="title">用户协议</h1>
-                <p class="effective-date"><strong>生效日期：2026年5月30日</strong></p>
-
-                <div class="mit-highlight">
-                    <strong>📜 MIT 许可证适用：</strong> 本软件（SWABox）受 <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener noreferrer" class="url">MIT 许可证</a> 保护。除本用户协议外，您对软件的使用还受 MIT 许可证条款约束。简而言之：您可以自由使用、修改、分发，但需自行承担风险，且必须保留原始版权声明。
-                </div>
-
-                <h2>1. 服务说明与协议范围</h2>
-                <p>本协议适用于您对 <strong>SWABox 桌面应用程序</strong>（以下简称“本应用”）的使用行为。本应用是一款本地优先工具，<strong>不连接任何云端服务、无后端服务器、不集成第三方分析或广告SDK</strong>。其核心功能（本地项目管理、文件编辑等）完全离线运行。</p>
-                <p>本应用内置以下<strong>可选功能</strong>，均需用户主动触发：</p>
-                <ul>
-                    <li><strong>打开指定网页（智能白板官网与对应软件下载页面）</strong>：调用系统默认浏览器访问第三方网站。</li>
-                    <li><strong>本地项目打开功能</strong>：读取您设备上选定的文件/文件夹，仅在本地处理。</li>
-                </ul>
-                <p>使用本应用即表示您已阅读、理解并同意本协议的全部条款。若您不同意，请立即停止使用并卸载本应用。</p>
-
-                <h2>2. 关于“打开指定网页”功能的责任限制</h2>
-                <p>本应用提供便捷按钮，可跳转至“智能白板官网”（具体网址以应用内标注为准）。您理解并同意：</p>
-                <ul>
-                    <li>该网页由独立的第三方运营，其内容、服务、隐私实践及安全性均与本应用无关。开发者不对该网站的任何信息、产品、服务或数据泄露承担责任。</li>
-                    <li>您主动点击即视为自愿离开本应用环境，应自行审阅该网站的《用户协议》与《隐私政策》，并承担访问该网站可能产生的任何风险。</li>
-                    <li>本应用不会向该网站传输任何个人身份信息，也无法控制该网站对您数据的收集与使用。如因此产生任何纠纷或损失，您应向该网站主张权利。</li>
-                </ul>
-
-                <h2>3. “本地项目打开功能”的用户义务与责任</h2>
-                <p>本应用允许您打开本地存储的项目文件（如白板工程文件、配置等）。您知悉并承诺：</p>
-                <ul>
-                    <li>您对所打开文件的合法性、安全性及完整性负全部责任。请确保您有权使用该文件，且文件不包含恶意代码、病毒或其他有害内容。</li>
-                    <li>本应用按“原样”读取文件内容，不对文件造成的任何直接或间接损失（包括数据损坏、设备故障、信息泄露等）承担责任。</li>
-                    <li>本应用不自动保存、上传或备份您的项目文件，请自行妥善保管原始文件。</li>
-                </ul>
-
-                <h2>4. 用户权利与义务</h2>
-                <p><strong>4.1 开源权利</strong><br>
-                    根据 MIT 许可证，您有权自由使用、复制、修改、合并、出版、分发及再许可本软件的副本。完整源代码可在 <a href="https://github.com/SWABox/SWABox" target="_blank" rel="noopener noreferrer" class="url">GitHub 仓库</a> 获取。</p>
-                <p><strong>4.2 使用限制</strong></p>
-                <ul>
-                    <li>不得将本应用或衍生版本用于任何违反中华人民共和国法律法规的活动（包括但不限于传播违法信息、侵犯他人权益）。</li>
-                    <li>不得对本应用进行反向工程、反编译或试图提取源代码（法律允许的除外）。</li>
-                    <li>不得利用本应用传播恶意软件、进行网络攻击或干扰其他用户正常使用。</li>
-                    <li>不得移除或篡改本软件中的版权声明、许可证信息。</li>
-                </ul>
-                <p><strong>4.3 商标与品牌</strong><br>
-                    MIT 许可证仅授予代码使用权，不授予您使用 “SWABox” 名称、Logo、图标或其他品牌标识进行商业推广或暗示官方背书的权利，除非获得开发者明确书面授权。</p>
-
-                <h2>5. 知识产权</h2>
-                <p><strong>软件代码</strong>：源代码部分遵循 MIT 许可证，版权归开发者所有，您须保留原始版权声明。<br>
-                    <strong>应用资产</strong>：包括但不限于应用图标、界面设计、预设图形素材等，除另有声明外，保留所有权利。未经许可不得复制、修改后用于其他项目或进行二次分发（独立的代码逻辑除外）。</p>
-
-                <h2>6. 免责声明（MIT 标准条款 + 应用特别说明）</h2>
-                <div class="warning-box">
-                    <strong>⚖️ 法律免责：</strong> 本软件及服务按“原样”提供，不提供任何形式的明示或暗示担保，包括但不限于适销性、特定用途适用性及不侵权担保。在适用法律允许的最大范围内，开发者或版权持有人不对任何索赔、损害或其他责任负责，无论是合同诉讼、侵权还是其他原因引起的，与软件或服务的使用或无法使用有关。
-                </div>
-                <p>鉴于本应用为开源免费软件，且完全不依赖云端服务，开发者不对以下情况承担责任：</p>
-                <ul>
-                    <li>因用户设备环境、操作系统兼容性、本地文件损坏等导致的应用功能异常。</li>
-                    <li>因使用“打开指定网页”功能而访问的第三方网站内容或隐私泄露。</li>
-                    <li>因用户自行修改源代码或非官方渠道获取的版本造成的任何问题。</li>
-                    <li>任何因不可抗力（如自然灾害、网络基础架构故障等）导致应用不可用。</li>
-                </ul>
-                <p>您使用本应用即表示您理解并自愿承担上述风险。</p>
-
-                <h2>7. 协议变更与终止</h2>
-                <p>开发者有权根据法律法规变化或应用功能更新需要，适时修改本协议。修改后的协议将在 <a href="https://github.com/SWABox/SWABox-site" target="_blank" rel="noopener noreferrer" class="url">GitHub 仓库 Release Notes</a> 或应用内置更新页面公布。若您继续使用本应用，视为接受修改后的协议。您亦可随时卸载本应用以终止协议。</p>
-
-                <h2>8. 法律适用与争议解决</h2>
-                <p>本协议的订立、执行和解释均适用中华人民共和国法律。如发生任何争议，双方应友好协商解决；协商不成的，任何一方可将争议提交至开发者所在地有管辖权的人民法院诉讼解决。</p>
-
-                <h2>9. 联系方式</h2>
-                <p>如对本协议有任何疑问或需要获取商标授权，请通过以下渠道联系：</p>
-                <ul>
-                    <li>GitHub Issues：<a href="https://github.com/SWABox/SWABox/issues" target="_blank" rel="noopener noreferrer" class="url">SWABox Issues</a></li>
-                    <li>邮箱：<a href="mailto:content@swabox.cc.cd" class="url">content@swabox.cc.cd</a></li>
-                </ul>
-                <div class="back-link">
-                    <a href="privacy.html">← 查看《隐私政策》</a><br>
-                    <a href="#" style="margin-top:0.5rem; display:inline-block;">返回 SWABox 首页</a>
-                </div>
-            </div>
-        </div>
-    </main>
-    <footer class="site-footer">
-        <div class="container">© 2026 SWABox · 开源软件 · 使用即视为同意用户协议</div>
-    </footer>
-</div>
+  <main class="doc">
+    <p class="doc__kicker">DOC / 02</p>
+    <h1 class="doc__title">用户协议</h1>
+    <p class="doc__meta">生效日期：2026 年 5 月 30 日</p>
+    <div class="doc__body">
+      <div class="note">
+      <strong>MIT 许可证适用：</strong> 本软件（SWABox）受 <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener noreferrer">MIT 许可证</a> 保护。除本用户协议外，您对软件的使用还受 MIT 许可证条款约束。简而言之：您可以自由使用、修改、分发，但需自行承担风险，且必须保留原始版权声明。
+      </div>
+      <h2>1. 服务说明与协议范围</h2>
+      <p>本协议适用于您对 <strong>SWABox 桌面应用程序</strong>（以下简称“本应用”）的使用行为。本应用是一款本地优先工具，<strong>不连接任何云端服务、无后端服务器、不集成第三方分析或广告SDK</strong>。其核心功能（本地项目管理、文件编辑等）完全离线运行。</p>
+      <p>本应用内置以下<strong>可选功能</strong>，均需用户主动触发：</p>
+      <ul>
+      <li><strong>打开指定网页（智能白板官网与对应软件下载页面）</strong>：调用系统默认浏览器访问第三方网站。</li>
+      <li><strong>本地项目打开功能</strong>：读取您设备上选定的文件/文件夹，仅在本地处理。</li>
+      </ul>
+      <p>使用本应用即表示您已阅读、理解并同意本协议的全部条款。若您不同意，请立即停止使用并卸载本应用。</p>
+      <h2>2. 关于“打开指定网页”功能的责任限制</h2>
+      <p>本应用提供便捷按钮，可跳转至“智能白板官网”（具体网址以应用内标注为准）。您理解并同意：</p>
+      <ul>
+      <li>该网页由独立的第三方运营，其内容、服务、隐私实践及安全性均与本应用无关。开发者不对该网站的任何信息、产品、服务或数据泄露承担责任。</li>
+      <li>您主动点击即视为自愿离开本应用环境，应自行审阅该网站的《用户协议》与《隐私政策》，并承担访问该网站可能产生的任何风险。</li>
+      <li>本应用不会向该网站传输任何个人身份信息，也无法控制该网站对您数据的收集与使用。如因此产生任何纠纷或损失，您应向该网站主张权利。</li>
+      </ul>
+      <h2>3. “本地项目打开功能”的用户义务与责任</h2>
+      <p>本应用允许您打开本地存储的项目文件（如白板工程文件、配置等）。您知悉并承诺：</p>
+      <ul>
+      <li>您对所打开文件的合法性、安全性及完整性负全部责任。请确保您有权使用该文件，且文件不包含恶意代码、病毒或其他有害内容。</li>
+      <li>本应用按“原样”读取文件内容，不对文件造成的任何直接或间接损失（包括数据损坏、设备故障、信息泄露等）承担责任。</li>
+      <li>本应用不自动保存、上传或备份您的项目文件，请自行妥善保管原始文件。</li>
+      </ul>
+      <h2>4. 用户权利与义务</h2>
+      <p><strong>4.1 开源权利</strong><br>
+      根据 MIT 许可证，您有权自由使用、复制、修改、合并、出版、分发及再许可本软件的副本。完整源代码可在 <a href="https://github.com/SWABox/SWABox" target="_blank" rel="noopener noreferrer">GitHub 仓库</a> 获取。</p>
+      <p><strong>4.2 使用限制</strong></p>
+      <ul>
+      <li>不得将本应用或衍生版本用于任何违反中华人民共和国法律法规的活动（包括但不限于传播违法信息、侵犯他人权益）。</li>
+      <li>不得对本应用进行反向工程、反编译或试图提取源代码（法律允许的除外）。</li>
+      <li>不得利用本应用传播恶意软件、进行网络攻击或干扰其他用户正常使用。</li>
+      <li>不得移除或篡改本软件中的版权声明、许可证信息。</li>
+      </ul>
+      <p><strong>4.3 商标与品牌</strong><br>
+      MIT 许可证仅授予代码使用权，不授予您使用 “SWABox” 名称、Logo、图标或其他品牌标识进行商业推广或暗示官方背书的权利，除非获得开发者明确书面授权。</p>
+      <h2>5. 知识产权</h2>
+      <p><strong>软件代码</strong>：源代码部分遵循 MIT 许可证，版权归开发者所有，您须保留原始版权声明。<br>
+      <strong>应用资产</strong>：包括但不限于应用图标、界面设计、预设图形素材等，除另有声明外，保留所有权利。未经许可不得复制、修改后用于其他项目或进行二次分发（独立的代码逻辑除外）。</p>
+      <h2>6. 免责声明（MIT 标准条款 + 应用特别说明）</h2>
+      <div class="note">
+      <strong>法律免责：</strong> 本软件及服务按“原样”提供，不提供任何形式的明示或暗示担保，包括但不限于适销性、特定用途适用性及不侵权担保。在适用法律允许的最大范围内，开发者或版权持有人不对任何索赔、损害或其他责任负责，无论是合同诉讼、侵权还是其他原因引起的，与软件或服务的使用或无法使用有关。
+      </div>
+      <p>鉴于本应用为开源免费软件，且完全不依赖云端服务，开发者不对以下情况承担责任：</p>
+      <ul>
+      <li>因用户设备环境、操作系统兼容性、本地文件损坏等导致的应用功能异常。</li>
+      <li>因使用“打开指定网页”功能而访问的第三方网站内容或隐私泄露。</li>
+      <li>因用户自行修改源代码或非官方渠道获取的版本造成的任何问题。</li>
+      <li>任何因不可抗力（如自然灾害、网络基础架构故障等）导致应用不可用。</li>
+      </ul>
+      <p>您使用本应用即表示您理解并自愿承担上述风险。</p>
+      <h2>7. 协议变更与终止</h2>
+      <p>开发者有权根据法律法规变化或应用功能更新需要，适时修改本协议。修改后的协议将在 <a href="https://github.com/SWABox/SWABox/releases" target="_blank" rel="noopener noreferrer">GitHub 仓库 Release Notes</a> 或应用内置更新页面公布。若您继续使用本应用，视为接受修改后的协议。您亦可随时卸载本应用以终止协议。</p>
+      <h2>8. 法律适用与争议解决</h2>
+      <p>本协议的订立、执行和解释均适用中华人民共和国法律。如发生任何争议，双方应友好协商解决；协商不成的，任何一方可将争议提交至开发者所在地有管辖权的人民法院诉讼解决。</p>
+      <h2>9. 联系方式</h2>
+      <p>如对本协议有任何疑问或需要获取商标授权，请通过以下渠道联系：</p>
+      <ul>
+      <li>GitHub Issues：<a href="https://github.com/SWABox/SWABox/issues" target="_blank" rel="noopener noreferrer">SWABox Issues</a></li>
+      <li>邮箱：<a href="mailto:content@swabox.cc.cd">content@swabox.cc.cd</a></li>
+      </ul>
+      <p class="doc__foot-links"><a href="privacy.html">→ 查看《隐私政策》</a></p>
+    </div>
+    <p class="doc__foot">SWABox · 开源 · MIT 许可 · <a href="https://swabox.cc.cd" target="_blank" rel="noopener">swabox.cc.cd</a></p>
+  </main>
 </body>
 </html>

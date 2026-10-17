@@ -143,7 +143,7 @@
     <h2 id="updates">8. 政策更新</h2>
     <p>
       我们可能会更新本隐私政策。重大变更将通过
-      <a href="https://github.com/SWABox/SWABox-site" target="_blank" rel="noopener noreferrer">网站仓库</a>
+      <a href="https://github.com/SWABox/SWABox-Site-NEW" target="_blank" rel="noopener noreferrer">网站仓库</a>
       的 Release Notes 或 Issue 通知。
     </p>
 
@@ -152,8 +152,8 @@
     <ul>
       <li>
         GitHub Issues：
-        <a href="https://github.com/SWABox/SWABox-site/issues" target="_blank" rel="noopener noreferrer">
-          SWABox-site Issues
+        <a href="https://github.com/SWABox/SWABox-Site-NEW/issues" target="_blank" rel="noopener noreferrer">
+          站点仓库 Issues
         </a>
       </li>
       <li>邮箱：<a href="mailto:content@swabox.cc.cd">content@swabox.cc.cd</a></li>

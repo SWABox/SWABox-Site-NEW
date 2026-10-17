@@ -1,7 +1,7 @@
 // 站点的硬信息集中在这里：改仓库地址、邮箱或工具清单时只改这一处。
 
 export const REPO_APP = 'https://github.com/SWABox/SWABox';
-export const REPO_SITE = 'https://github.com/SWABox/SWABox-site';
+export const REPO_SITE = 'https://github.com/SWABox/SWABox-Site-NEW';
 export const RELEASES = REPO_APP + '/releases/latest';
 export const ISSUES = REPO_APP + '/issues';
 export const SITE_URL = 'https://swabox.cc.cd';

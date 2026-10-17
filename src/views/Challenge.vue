@@ -20,12 +20,6 @@ function goBack() {
 async function handleVerified(token) {
   notice.value = '';
 
-  if (import.meta.env.DEV) {
-    localStorage.setItem('swabox_verified', JSON.stringify({ valid: true, ts: Date.now() }));
-    goBack();
-    return;
-  }
-
   try {
     const response = await fetch('/api/verify-turnstile', {
       method: 'POST',

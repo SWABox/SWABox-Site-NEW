@@ -79,7 +79,7 @@
     <h2 id="changes">6. 协议变更</h2>
     <p>
       开发者有权根据需要随时更新本协议。重大变更将通过
-      <a href="https://github.com/SWABox/SWABox-site" target="_blank" rel="noopener noreferrer">网站仓库</a>
+      <a href="https://github.com/SWABox/SWABox-Site-NEW" target="_blank" rel="noopener noreferrer">网站仓库</a>
       的 Release Notes 或 Issue 通知。建议您定期查阅本页面。
     </p>
 

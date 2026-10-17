@@ -1,7 +1,7 @@
 <template>
   <!-- 没过验证：只给验证页，别的内容都不渲染。 -->
   <TurnstileChallenge
-    v-if="!isHumanVerified"
+    v-if="securityEnabled && !isHumanVerified"
     :notice="gateNotice"
     @verified="handleVerified"
     @error="handleChallengeError"
@@ -16,6 +16,7 @@ import { onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import SiteShell from '../components/SiteShell.vue';
 import TurnstileChallenge from '../components/TurnstileChallenge.vue';
+import { securityEnabled } from '../data/runtime.js';
 
 const VERIFIED_KEY = 'swabox_verified';
 const TTL = 24 * 60 * 60 * 1000;
@@ -53,19 +54,11 @@ function followRedirect() {
 }
 
 onMounted(() => {
-  isHumanVerified.value = readVerified();
+  isHumanVerified.value = securityEnabled ? readVerified() : true;
 });
 
 async function handleVerified(token) {
   gateNotice.value = '';
-
-  // 本地开发没有 Pages Function，直接放行，免得调试时卡在这。
-  if (import.meta.env.DEV) {
-    saveVerified();
-    isHumanVerified.value = true;
-    followRedirect();
-    return;
-  }
 
   try {
     const response = await fetch('/api/verify-turnstile', {

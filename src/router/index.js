@@ -4,6 +4,7 @@ import Privacy from '../views/Privacy.vue';
 import Terms from '../views/Terms.vue';
 import Challenge from '../views/Challenge.vue';
 import Error from '../views/Error.vue';
+import { securityEnabled } from '../data/runtime.js';
 
 const routes = [
   { path: '/', name: 'Home', component: Home, meta: { requiresAuth: true } },
@@ -25,6 +26,9 @@ const router = createRouter({
 });
 
 const HOME_TITLE = 'SWABox 电教工具箱 · 把要用的工具收进一个盒子';
+
+// 开发地址是否也开验证，由 VITE_ENABLE_SECURITY 决定，见 src/data/runtime.js。
+
 
 router.afterEach((to) => {
   document.title = to.meta.title ? `${to.meta.title} · SWABox 电教工具箱` : HOME_TITLE;
@@ -48,8 +52,11 @@ function hasValidPass() {
   }
 }
 
+// 是否检查由开发服务器说了算（见 vite.config.js 里的 define）：
+// 原版站点开验证，development 关掉，需要时用 VITE_ENABLE_SECURITY=true 打开。
+// 这里不再按 import.meta.env.DEV 硬跳过，否则 dev 下永远看不到验证和协议弹窗。
 router.beforeEach((to) => {
-  if (import.meta.env.DEV) return true;
+  if (!securityEnabled) return true;
   if (!to.matched.some((record) => record.meta.requiresAuth)) return true;
   if (hasValidPass()) return true;
   return { path: '/challenge', query: { redirect: to.fullPath } };
