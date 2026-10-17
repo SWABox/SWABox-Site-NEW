@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>隐私政策 | SWABox 应用</title>
+    <style>
+        /* ========== 深色主题，完全去除噪点背景 ========== */
+        :root {
+            --bg-base: #0a0a0f;
+            --bg-elevated: #111118;
+            --bg-surface: #18181f;
+            --bg-hover: #1f1f2a;
+            --green-primary: #22c55e;
+            --green-light: #86efac;
+            --green-muted: #166534;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-dim: #475569;
+            --border-default: rgba(255, 255, 255, 0.08);
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --nav-height: 72px;
+            --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+        }
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background: var(--bg-base);
+            color: var(--text-primary);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            /* 无噪点背景，无径向渐变叠加，保持纯净深色 */
+            background-color: #0a0a0f;
+        }
+        /* 移除所有噪声图案和多余光晕 */
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        .container {
+            width: min(1200px, 94vw);
+            margin-inline: auto;
+        }
+        ::selection {
+            background: rgba(34, 197, 94, 0.3);
+            color: var(--text-primary);
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-base);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2a2a35;
+            border-radius: 8px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--green-muted);
+        }
+        /* 导航栏 */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 15, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-default);
+            z-index: 100;
+            height: var(--nav-height);
+            display: flex;
+            align-items: center;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: min(1200px, 94vw);
+            margin: 0 auto;
+        }
+        .logo a {
+            font-weight: 700;
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, var(--green-primary), var(--green-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        .nav-links a {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--green-primary);
+        }
+        /* 页脚 */
+        .site-footer {
+            border-top: 1px solid var(--border-default);
+            padding: 2rem 0;
+            margin-top: 2rem;
+            text-align: center;
+            color: var(--text-dim);
+            font-size: 0.85rem;
+        }
+        /* 文档卡片 */
+        .privacy-page, .terms-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .main-content {
+            flex: 1;
+            padding: calc(var(--nav-height) + 48px) 0 80px;
+        }
+        .document-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-default);
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--green-primary), var(--green-light));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            border-bottom: 2px solid var(--border-default);
+            padding-bottom: 1rem;
+        }
+        .update-date, .effective-date {
+            color: var(--text-dim);
+            margin-bottom: 1.5rem;
+        }
+        .mit-notice, .mit-highlight {
+            background: rgba(34, 197, 94, 0.08);
+            border-left: 4px solid var(--green-primary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        }
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem;
+            color: var(--text-primary);
+        }
+        p, li {
+            color: var(--text-secondary);
+        }
+        ul {
+            margin: 1rem 0 1rem 2rem;
+        }
+        li {
+            margin: 0.5rem 0;
+        }
+        .url {
+            color: var(--green-primary);
+            text-decoration: none;
+        }
+        .url:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: block;
+            margin-top: 2rem;
+            text-align: center;
+            color: var(--text-dim);
+            font-weight: 500;
+        }
+        .back-link:hover {
+            color: var(--green-primary);
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            color: var(--text-secondary);
+            background: rgba(0,0,0,0.3);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+        }
+        .data-table th, .data-table td {
+            border: 1px solid var(--border-default);
+            padding: 0.75rem 1rem;
+            text-align: left;
+            vertical-align: top;
+        }
+        .data-table th {
+            background: rgba(34, 197, 94, 0.1);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        @media (max-width: 768px) {
+            .document-card { padding: 1.5rem; }
+            .title { font-size: 1.8rem; }
+            h2 { font-size: 1.25rem; }
+        }
+        .feature-warning {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid #ef4444;
+            padding: 1rem 1.5rem;
+            margin: 1.2rem 0;
+            border-radius: var(--radius-md);
+        }
+    </style>
+</head>
+<body>
+<div class="privacy-page">
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo"><a href="#">SWABox</a></div>
+            <div class="nav-links">
+                <a href="privacy.html" class="active">隐私政策</a>
+                <a href="terms.html">用户协议</a>
+            </div>
+        </div>
+    </nav>
+    <main class="main-content">
+        <div class="container">
+            <div class="document-card">
+                <h1 class="title">隐私政策</h1>
+                <p class="update-date"><strong>最后更新日期：2026年5月30日</strong></p>
+
+                <div class="mit-notice">
+                    <strong>📄 开源协议声明：</strong> SWABox 桌面应用源代码采用 <strong>MIT 开源许可证</strong>。您可自由使用、修改、分发，但须保留版权声明。本隐私政策仅适用于本应用程序（本地版本），我们承诺应用无隐蔽后门、无主动数据外传，所有核心功能均在您的设备上本地执行。
+                </div>
+
+                <h2>引言</h2>
+                <p>欢迎使用 SWABox 应用程序（以下简称“本应用”）。本应用是一款<strong>本地优先、离线可用</strong>的生产力工具，始终将您的隐私放在首位。本隐私政策旨在透明说明本应用如何处理您的信息。本应用<strong>不设用户账户、不要求注册登录、不主动收集任何个人身份信息</strong>，绝大多数功能完全离线运行。</p>
+
+                <h2>1. 开源透明性与数据处理独立性</h2>
+                <p>SWABox 完整源代码托管于 <a href="https://github.com/SWABox/SWABox" target="_blank" rel="noopener noreferrer" class="url">GitHub</a>，采用 MIT 许可证。您可随时审查代码以确认隐私承诺。我们保证：</p>
+                <ul>
+                    <li><strong>本地运行</strong>：除非您主动触发「打开官网」功能，否则应用不发起任何网络请求。所有项目文件、配置数据仅存在于您的设备中。</li>
+                    <li><strong>无跟踪分析</strong>：应用不集成任何统计、崩溃报告、广告或第三方SDK，无任何数据上传行为。</li>
+                    <li><strong>代码透明</strong>：任何人都可通过源代码验证“零数据收集”的真实性。</li>
+                </ul>
+
+                <h2>2. 我们如何收集和使用您的信息</h2>
+                <p><strong>默认情况下本应用不收集任何信息。</strong> 您主动使用的特定功能可能涉及本地数据或临时网络请求，详细说明如下：</p>
+                <table class="data-table">
+                    <thead>
+                    <tr><th>功能场景</th><th>涉及的数据类型</th><th>处理方式与目的</th></tr>
+                    </thead>
+                    <tbody>
+                    <tr><td><strong>常规运行 / 界面交互</strong></td><td>无数据收集</td><td>应用仅在本地渲染界面，不记录任何日志、不追踪使用习惯。</td></tr>
+                    <tr><td><strong>内置“打开智能白板官网与对应软件下载页面”</strong></td><td>网络请求元数据（IP地址、User-Agent等由您的操作系统浏览器处理）</td><td>您点击按钮后，应用调用系统默认浏览器访问指定官网。本应用<strong>不参与、不记录、不上传</strong>该过程中的任何数据。目标网站的隐私实践与本应用无关。</td></tr>
+                    <tr><td><strong>本地项目打开功能</strong></td><td>您主动选择的本地文件夹/项目文件内容</td><td>应用仅读取您指定的文件（如白板工程、配置等）用于展示或编辑，所有内容<strong>仅在本地内存中处理</strong>，绝不自动上传至任何服务器，也不会被本应用秘密收集或外传。</td></tr>
+                    </tbody>
+                </table>
+                <p><strong>重要声明：</strong> 本应用不使用 Cloudflare、无任何 CDN、无人机验证、无第三方分析工具，不连接任何远程后端服务器。完全独立运行，不依赖网络。</p>
+
+                <h2>3. 内置“打开指定网页”功能的隐私说明</h2>
+                <p>本应用提供便捷入口，可跳转至“智能白板官网与对应软件下载页面”（具体网址以应用内标注为准）。请注意：</p>
+                <ul>
+                    <li>点击后本应用将<strong>离开应用环境</strong>，通过您设备上的默认浏览器访问该第三方网站。</li>
+                    <li>该网站的隐私政策、数据收集方式、Cookie 使用等<strong>完全由该网站负责</strong>，本应用不对其内容、安全或隐私泄露承担任何责任。建议您在使用前仔细阅读目标网站的隐私政策。</li>
+                    <li>本应用不会向该网站传输任何额外标识信息，也不对该网站可能收集的数据作任何担保。</li>
+                    <li>您主动点击即表示理解并同意自行承担跳转至外部网站的一切后果。</li>
+                </ul>
+
+                <h2>4. “本地项目打开功能”的数据处理细节</h2>
+                <p>本应用支持打开本地项目文件（如白板工程、数据文件等），具体特性：</p>
+                <ul>
+                    <li><strong>完全本地化</strong>：通过系统文件选择器获取文件，应用仅在您授权后读取文件内容，并在界面呈现。</li>
+                    <li><strong>不存储路径索引</strong>：应用不会在配置文件或任何地方记录您的文件绝对路径，也不会后台扫描您的磁盘。</li>
+                    <li><strong>无上传风险</strong>：所读取的项目文件内容绝不通过任何网络形式发送，您可以完全离线使用此功能。</li>
+                    <li><strong>用户责任</strong>：请确保打开的项目文件来源安全可靠，本应用不对因打开恶意文件造成的设备损失承担责任（详见用户协议免责声明）。</li>
+                </ul>
+
+                <h2>5. 无第三方服务声明</h2>
+                <p>本应用不集成任何第三方SDK，不使用远程数据收集脚本，不展示广告，不接入社交组件。因此不存在任何第三方分析、定位、认证等可能收集您个人信息的情形。唯一的网络访问仅为“打开官网”功能，且该调用完全由操作系统和浏览器接管，本应用不截获任何数据。</p>
+
+                <h2>6. 您的权利</h2>
+                <p>依据《中华人民共和国个人信息保护法》及相关法律，您享有知情权、查阅权、删除权等。由于本应用完全不收集个人信息，您的权利自然得到充分保障：</p>
+                <ul>
+                    <li><strong>知情与查阅</strong>：您可随时查阅本隐私政策，并审查<a href="https://github.com/SWABox/SWABox" target="_blank" rel="noopener noreferrer" class="url">开源代码</a>以确认数据处理逻辑。</li>
+                    <li><strong>删除与控制</strong>：所有项目文件均存储在您本地，您可直接通过文件系统删除相关文件。本应用无云端存储，无需“账户删除”流程。</li>
+                    <li><strong>拒绝与限制</strong>：若您不希望使用“打开官网”功能，请勿点击按钮，该功能不影响本地项目的所有核心能力。</li>
+                </ul>
+
+                <h2>7. 儿童隐私</h2>
+                <p>本应用不针对13岁以下儿童设计，也不会收集任何用户的年龄或身份信息。家长可放心监督使用。</p>
+
+                <h2>8. 隐私政策更新</h2>
+                <p>我们可能不定期更新本隐私政策。如有重大变更（例如新增需要网络的功能），将通过官方 GitHub 仓库 Release Notes 或应用内更新页面通知。您继续使用本应用即表示接受更新后的条款。</p>
+
+                <h2>9. 联系我们</h2>
+                <p>如有任何疑问或欲行使您的权利，请通过以下渠道联系：</p>
+                <ul>
+                    <li>GitHub Issues：<a href="https://github.com/SWABox/SWABox/issues" target="_blank" rel="noopener noreferrer" class="url">SWABox Issues</a></li>
+                    <li>邮箱：<a href="mailto:content@swabox.cc.cd" class="url">content@swabox.cc.cd</a></li>
+                </ul>
+                <div class="back-link">
+                    <a href="terms.html">→ 查看《用户协议》</a><br>
+                    <a href="#" style="margin-top:0.5rem; display:inline-block;">← 返回 SWABox 首页</a>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="site-footer">
+        <div class="container">© 2026 SWABox · 开源软件 · 隐私优先 · 零数据收集</div>
+    </footer>
+</div>
+</body>
+</html>
