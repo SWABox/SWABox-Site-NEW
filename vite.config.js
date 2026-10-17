@@ -13,8 +13,12 @@ export default defineConfig(({ command, mode }) => {
 
   const siteModePlugin = {
     name: 'swabox:site-mode',
+    // 构建阶段也用同一个插件，不依赖 define：否则 serve 与 build 是两套替换逻辑，
+    // 一旦 define 那条没生效（例如配置被改过），产物会带着未定义标识符直接崩在浏览器里。
+    // 这里只处理 src/** 下的模块，node_modules 与 Vue 编译产物不碰。
     transform(code, id) {
-      if (!isServe || !id.includes('/src/') || !code.includes('SITE_MODE')) return null;
+      const file = id.split('?')[0];
+      if (!/[\\/]src[\\/]/.test(file) || !code.includes('SITE_MODE_INJECTED')) return null;
       return code
         .replaceAll('typeof SITE_MODE_INJECTED', '"string"')
         .replace(/\bSITE_MODE_INJECTED\b/g, JSON.stringify(securityEnabled ? 'production' : 'development'));
